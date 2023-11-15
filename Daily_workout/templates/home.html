@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+
+{% block main_content %}
+<!-- WARMUP SECTION -->
+<section class="workout">
+    <h2 class="workout__title">Aquecimento</h2>
+    <p class="workout__p">Cada treino sempre começa com um aquecimento bom e específico. O objetivo é ativar o seu sistema cardiovascular e aquecer seus músculos, preparando-os para o exercício. Nunca pule o aquecimento!</p>
+    
+    <p class="workout__p">Um bom aquecimento melhora o desempenho atlético, reduz lesões e aumenta a mobilidade.</p>
+    {% if warmups_to_do %}
+        <p class="workout__p">Faça os seguintes exercícios de aquecimento:</p>
+        <ul id="exercise-list">
+            <!-- Warmup list of exercises -->
+            {% for warmup in warmups_to_do %}
+                <li class="exercise">{{ warmup }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="workout__p2">Clique no botão abaixo para gerar os exercícios de aquecimento de hoje!</p>   
+    {% endif %}
+
+    
+    <a class="generate" href="{{ url_for('pages.generate_warmup') }}">
+        <button class="generate__button" type="button">Gerar aquecimento!</button>
+      </a>      
+</section>
+<!-- SKILL SECTION -->
+<section class="workout">
+    <h2 class="workout__title">Skills</h2>
+    <p class="workout__p">Essas habilidades ajudam a desenvolver a força e a propriocepção necessárias para progredir para exercícios de calistenia mais avançados. São exercícios de progressão perfeitos, que qualquer iniciante deveria ser capaz de realizar. Eles reproduzem certas partes dos movimentos mais avançados, os quais podem ser impossíveis inicialmente.</p>
+    
+    <p class="workout__p">Dedique pelo menos 10-15 minutos do seu treino para essas habilidades. Você não precisa executar todas elas em cada sessão. Na verdade, recomendamos focar em uma ou duas por sessão, com base nos seus objetivos gerais.</p>
+    
+    <p class="workout__p">É melhor realizá-las antes da seção de fundamentos de força do seu treino, quando seu corpo ainda está fresco e você pode se concentrar totalmente em executar as técnicas corretamente.</p>
+    {% set skills_combined_list = skills_combined | list %}
+    {% if skills_combined_list | length > 0 %}
+        <p class="workout__p">Faça os seguintes exercícios de skill:</p>
+        <ul id="exercise-list">
+            <!-- Skills list of exercises -->
+            {% for skill, link in skills_combined_list %}
+                <div class="exercise__container">
+                    <li class="exercise">{{ skill }}</li>
+                    <a class="exercise__video-link" href="{{ link }}"><Button class="exercise__video-button">Ver exercício no Youtube!</Button></a>
+                </div>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="workout__p2">Clique no botão abaixo para gerar os exercícios de skills de hoje!</p>   
+    {% endif %}
+
+    
+    <a class="generate" href="{{ url_for('pages.generate_skill') }}">
+        <button class="generate__button" type="button">Gerar skills!</button>
+      </a>      
+</section>
+<!-- STRENGTH SECTION -->
+<section class="workout">
+    <h2 class="workout__title">Workout - Musculação</h2>
+    <p class="workout__p">Estes são os alicerces de um bom treino de calistenia. São os exercícios-chave que desenvolvem o seu corpo e o preparam para alguns dos exercícios mais avançados. É realmente importante focar na técnica correta, o que garante resultados máximos à medida que você se desenvolve.</p>
+    
+    <p class="workout__p">Como iniciante, é fundamental trabalhar o corpo inteiro em cada treino, em vez de dividir seus treinos em grupos musculares específicos. Isso oferece a maior chance de adaptação anatômica e também garante que você não está deixando de trabalhar nenhum grupo muscular. Um período de descanso de 3 minutos entre as séries é uma boa regra geral.</p>
+    
+    <p class="workout__p">Quando estiver confortável com essas repetições, utilize um colete ponderado para manter sua faixa de repetições em torno de 3-8, para ganhos máximos de força.</p>
+    {% if workout_to_do %}
+        <p class="workout__p">Faça o seguinte treino de musculação:</p>
+        <ul id="exercise-list">
+            <!-- Warmup list of exercises -->
+            {% for workout in workout_to_do[0] %}
+                <li class="exercise">{{ workout }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="workout__p2">Clique no botão abaixo para gerar o treino de musculação de hoje!</p>   
+    {% endif %}
+
+    
+    <a class="generate" href="{{ url_for('pages.generate_strength') }}">
+        <button class="generate__button" type="button">Gerar treino de musculação!</button>
+      </a>      
+</section>
+{% endblock %}

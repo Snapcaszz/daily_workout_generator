@@ -1,0 +1,3 @@
+FLASK_APP=Daily_workout
+FLASK_ENV=development
+FLASK_DEBUG=1

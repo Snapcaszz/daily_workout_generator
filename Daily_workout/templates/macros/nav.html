@@ -1,0 +1,17 @@
+{% macro header() %}
+    <header class="header">
+        <div class="nav-bar">
+            <a class="header__logo" href="{{ url_for('pages.home') }}">
+                <img class="logo__icon" src="{{ url_for('static', filename='img/workout_logo.svg')}}" alt="Workout Logo">
+                <span class="logo__name">Daily Workout - Generator</span>
+            </a>
+            <nav class="nav">
+                    <a 
+                    class="nav__link {{ 'nav__link-active' if request.path == url_for('pages.home') }}" 
+                    href="{{ url_for('pages.refresh') }}">
+                        <span class="nav__item">Refresh</span>
+                    </a>
+            </nav>
+        </div>
+    </header>
+{% endmacro %}
